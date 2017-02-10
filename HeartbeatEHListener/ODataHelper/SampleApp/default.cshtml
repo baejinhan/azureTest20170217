@@ -1,0 +1,168 @@
+﻿<h2>OData Helper</h2>
+<p>The OData helper allows you to easily retrieve and update data from any service that expose its data using the OData Protocol. It does not require that you configure any specific client or create any custom class; 
+by pointing the helper to the correct URL, you can have all the data you need ready to be displayed using the Razor syntax.</p>
+<p>In this page you will find different usage samples of the OData helper that query the NetFlix OData service. 
+For more information on the NetFlix OData service check: <a href="http://developer.netflix.com/docs/OData_Catalog">http://developer.netflix.com/docs/OData_Catalog</a></p>
+
+<form action="@Href("Default")" method="get">
+<p>Select a sample query: 
+    <select name="ShowQuery">        
+        <option value="query1" @("query1"==Request["ShowQuery"] ? "selected=selected" : String.Empty)>Top 5 Horror Titles (Using string query options)</option>
+        <option value="query2" @("query2"==Request["ShowQuery"] ? "selected=selected" : String.Empty)>Top Movies in French (Using query options helpers)</option>
+        <option value="query3" @("query3"==Request["ShowQuery"] ? "selected=selected" : String.Empty)>Comedy Titles Between 1980 and 1990 (Using string query options)</option>
+        <option value="query4" @("query4"==Request["ShowQuery"] ? "selected=selected" : String.Empty)>Titles with the Word Computer in Synapsis (Using query options helpers)</option>    
+        <option value="query5" @("query5"==Request["ShowQuery"] ? "selected=selected" : String.Empty)>Inserting New Data (Code only)</option>    
+        <option value="query6" @("query6"==Request["ShowQuery"] ? "selected=selected" : String.Empty)>Updating Data (Code only)</option>    
+        <option value="query7" @("query7"==Request["ShowQuery"] ? "selected=selected" : String.Empty)>Deleting Data (Code only)</option>    
+    </select>
+    <input type="submit" value="Show" /></p>    
+</form>
+    
+<div class="start">
+@if(Request["ShowQuery"] == "query1") {
+    var result = OData.Get("http://odata.netflix.com/Catalog/Genres('Horror')/Titles","$orderby=AverageRating desc&$top=5");
+    var grid = new WebGrid(result);   
+    
+	<h3>Top 5 Horror Titles (Using String Filters)</h3>      
+	        
+    <div class="code">    
+    @@{<br/>
+    <span class="codeIndent1">var result = OData.Get("http://odata.netflix.com/Catalog/Genres('Horror')/Titles","$orderby=AverageRating desc&amp;$top=5");<br/></span>
+    <span class="codeIndent1">var grid = new WebGrid(result);<br/></span>
+    }
+    </div>
+    
+    @grid.GetHtml(tableStyle: "dg_table", 
+                    headerStyle: "dg_header", 
+                    alternatingRowStyle: "dg_altrow",
+                    columns: grid.Columns(
+						        grid.Column("Name", header: "Name"),
+						        grid.Column("ShortSynopsis", header: "Short Synopsis"),
+                                grid.Column("ReleaseYear", header: "Release Year"))                           
+				            );
+}
+
+@if(Request["ShowQuery"] == "query2") {
+    var result = OData.Open("http://odata.netflix.com/Catalog/Languages('French')/Titles")
+                .Where("Type eq 'Movie'")
+                .OrderBy("AverageRating desc")
+                .Top(3)
+                .Get();
+    var grid = new WebGrid(result);
+    
+	<h3>Top 3 Movies in French (Using Query Helpers)</h3>
+	
+
+    <div class="code">    
+    @@{<br/>
+    <span class="codeIndent1">var result = OData.Open("http://odata.netflix.com/Catalog/Languages('French')/Titles")<br/></span>
+    <span class="codeIndent2">.Where("Type eq 'Movie'")<br/></span>
+    <span class="codeIndent2">.OrderBy("AverageRating desc")<br/></span>
+    <span class="codeIndent2">.Top(3)<br/></span>
+    <span class="codeIndent2">.Get();<br/></span>
+    <span class="codeIndent1">var grid = new WebGrid(result);<br/></span>
+    }
+    </div>
+
+    @grid.GetHtml(tableStyle: "dg_table", 
+                    headerStyle: "dg_header", 
+                    alternatingRowStyle: "dg_altrow",
+                    columns: grid.Columns(
+						        grid.Column("Name", header: "Name"),
+						        grid.Column("ShortSynopsis", header: "Short Synopsis"),
+                                grid.Column("ReleaseYear", header: "Release Year"))
+				            );
+}
+
+@if(Request["ShowQuery"] == "query3") {
+    var result = OData.Get("http://odata.netflix.com/Catalog/Genres('Comedy')/Titles","$filter=ReleaseYear ge 1980 and ReleaseYear le 1990&$top=4"); 
+    
+    <h3>Comedy Titles Between 1980 and 1990 (Using String Filters)</h3>
+       
+    <div class="code">    
+    @@{<br/>
+    <span class="codeIndent1">var result = OData.Get("http://odata.netflix.com/Catalog/Genres('Comedy')/Titles","$filter=ReleaseYear ge 1980 and ReleaseYear le 1990&amp;$top=4");<br/></span>    
+    }
+    </div>
+    
+    foreach (var movie in result) {
+        <div class="moviesResult">        
+            <img class="moviesImages" src="@movie.BoxArt.LargeUrl" alt="Movie Image" />
+            <div class="movieDetails">
+                <p><b>@movie.Name</b> (@movie.ReleaseYear)</p>
+                <p>@movie.ShortSynopsis</p>
+            </div>
+            <div style="clear: both" ></div>       
+       </div>
+    }        
+}
+
+@if(Request["ShowQuery"] == "query4") {
+        var result = OData.Open("http://odata.netflix.com/Catalog/Titles")
+            .Where("substringof('computer', ShortSynopsis)")                
+            .Top(4)
+            .Get();
+    
+     <h3>Titles with the Word Computer in Synapsis (Using Query Helpers)</h3>
+       
+    <div class="code">    
+    @@{<br/>
+    <span class="codeIndent1">var result = OData.Open("http://odata.netflix.com/Catalog/Titles");<br/></span>
+    <span class="codeIndent2">.Where("substringof('computer', ShortSynopsis)")<br/></span>    
+    <span class="codeIndent2">.Top(4)<br/></span>
+    <span class="codeIndent2">.Get();<br/></span>
+    }
+    </div>
+    
+    foreach (var movie in result) {
+        <div class="moviesResult">        
+            <img class="moviesImages" src="@movie.BoxArt.LargeUrl" alt="Movie Image" />
+            <div class="movieDetails">
+                <p><b>@movie.Name</b> (@movie.ReleaseYear)</p>
+                <p>@movie.ShortSynopsis</p>
+            </div>
+            <div style="clear: both" ></div>       
+       </div>
+    }       
+}    
+
+@if(Request["ShowQuery"] == "query5") {
+     <h3>Inserting New Data</h3>
+       
+    <p>This sample is provided only as an example of how to insert new data to an OData Service. It is not meant for execution.</p>
+    <div class="code">    
+    @@{<br/>
+    <span class="codeIndent1">var movie = OData.CreateEntity();<br/></span>
+    <span class="codeIndent1">movie.Name = "OData Helpers - The Movie";<br/></span>    
+    <span class="codeIndent1">movie.ReleaseYear = 2010;<br/></span>
+    <span class="codeIndent1">movie.BoxArt.LargeUrl = "http://cdn-4.nflximg.com/us/boxshots/tiny/5670394.jpg";<br/></span>    
+    <span class="codeIndent1">OData.Insert("http://odata.netflix.com/Catalog/Titles", movie);<br/></span>
+    }
+    </div>
+}
+
+@if(Request["ShowQuery"] == "query6") {
+     <h3>Updating Data</h3>
+       
+    <p>This sample is provided only as an example of how to update data from an OData Service. It is not meant for execution.</p>
+    <div class="code">    
+    @@{<br/>
+    <span class="codeIndent1">var movie = OData.Get("http://odata.netflix.com/Catalog/Titles('13kaI')");<br/></span>
+    <span class="codeIndent1">movie.Name = "OData Helpers - The Movie";<br/></span>        
+    <span class="codeIndent1">OData.Update("http://odata.netflix.com/Catalog/Titles('13kaI')", movie);<br/></span>
+    }
+    </div>
+}
+
+@if(Request["ShowQuery"] == "query7") {
+     <h3>Deleting Data</h3>
+       
+    <p>This sample is provided only as an example of how to delete data from an OData Service. It is not meant for execution.</p>
+    <div class="code">    
+    @@{<br/>    
+    <span class="codeIndent1">OData.Delete("http://odata.netflix.com/Catalog/Titles('13kaI')");<br/></span>
+    }
+    </div>
+}
+
+</div>

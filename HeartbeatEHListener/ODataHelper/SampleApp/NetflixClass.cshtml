@@ -1,0 +1,15 @@
+﻿<h2>Netflix Class</h2>
+<p>Along with this helper, you will find the <b>Netflix</b> class, which is as an example on how wrap up the OData helper to define your own custom helper operations against a specific OData Producer, in this case <a href="http://developer.netflix.com/docs/OData_Catalog">NetFlix</a>. Continue extending this class by adding more Netflix queries!</p>
+<div>
+<img src="@Href("Shared/images/NetflixClass.png")" />
+</div>
+
+<div class="start">
+    <h3>Netflix Class Usage Sample</h3>
+    <p>The following is an example of a <b>Netflix</b> class method call that retrieves the top 10 Horror Movies:</p>
+    <div class="code">                
+        @@{<br/>    
+        <span class="codeIndent1">var results = Netflix.GetTopMoviesByGenre("Horror", count:10);<br/></span>
+        }
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>OData Helper for WebMatrix</title>    
+    <link href="@Href("Site.css")" rel="stylesheet" type="text/css" />    
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" /> 
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="@Href("images/webx-icon.png")" alt="WebMatrix" />
+            <h1>WebMatrix Helpers</h1>  
+            <p>The WebMatrix helpers are designed to make your life easier when creating web sites. <br /> Download more helpers from <a href="http://www.codeplex.com/site/search?TagName=WebMatrix%20Helpers">CodePlex</a> or learn more on Web Matrix and ASP.NET Web Pages <a href="http://www.microsoft.com/web/webmatrix/learn/">here</a>.</p>
+        </div>
+        
+        <div class="content">
+            <div class="navLinks"><a href="@Href("../Default")">Helper Samples</a> | <a href="@Href("../ODataReference")">Helper Reference</a> | <a href="@Href("../NetflixClass")">Netflix Class</a></div>
+            @RenderBody()
+        </div>
+
+        <ul class="footer">
+            <li>We're always looking for <a href="mailto:webapp@@microsoft.com">bugs, feedback and suggestions!</a></li>
+            <li>&copy; 2010-2011 Microsoft Corporation. Powered by IIS Express.</li>           
+        </ul>
+    </div>
+</body>
+</html>

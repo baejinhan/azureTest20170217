@@ -1,0 +1,54 @@
+﻿<h2>OData Helper</h2>
+<h3>Helper Reference</h3>
+<p>This is the list of methods supported by the OData Helper:</p>
+
+<table class="memberdecls">
+<tr><td class="memItemLeft">static ODataQuery&nbsp;</td><td class="memItemRight" ><b>Open</b> (string serviceUri)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new OData query instance pointing to the specified service Uri.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static ODataQuery&nbsp;</td><td class="memItemRight" ><b>Open</b> (string serviceUri, IAuthenticationScheme authScheme)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new OData query instance pointing to the specified service Uri.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static dynamic&nbsp;</td><td class="memItemRight" ><b>CreateMediaLink</b> (Stream mediaResource, string contentType)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new instance of a OData Media Link.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static dynamic&nbsp;</td><td class="memItemRight" ><b>CreateEntity</b> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new instance of a OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Insert</b> (string entitySetUri, DynamicEntity entity)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Inserts a new a OData Entity in the specified entity set.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Insert</b> (string entitySetUri, DynamicEntity entity, IAuthenticationScheme authScheme)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Inserts a new a OData Entity in the specified entity set.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Update</b> (string entityUri, DynamicEntity entity)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Updates the contents of an existing OData Entity. <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Update</b> (string entityUri, DynamicEntity entity, string etag)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Updates the contents of an existing OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Update</b> (string entityUri, DynamicEntity entity, IAuthenticationScheme authScheme)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Updates the contents of an existing OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Update</b> (string serviceUri, DynamicEntity entity, IAuthenticationScheme authScheme, string etag)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Updates the contents of an existing OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Delete</b> (string entityUri)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes an existing OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Delete</b> (string serviceUri, string etag)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes an existing  OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Delete</b> (string entityUri, IAuthenticationScheme authScheme)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes an existing  OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static void&nbsp;</td><td class="memItemRight" ><b>Delete</b> (string entityUri, IAuthenticationScheme authScheme, string etag)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes an existing  OData Entity.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static IList&lt; dynamic &gt;&nbsp;</td><td class="memItemRight" ><b>Get</b> (string serviceUri)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Performs a request to the OData Service Uri returning a dynamic list with the results.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static IList&lt; dynamic &gt;&nbsp;</td><td class="memItemRight" ><b>Get</b> (string serviceUri, IAuthenticationScheme authScheme)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Performs a request to the OData Service Uri returning a dynamic list with the results.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static IList&lt; dynamic &gt;&nbsp;</td><td class="memItemRight" ><b>Get</b> (string serviceUri, string queryOptions)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Performs a request to the OData Service Uri returning a dynamic list with the results.  <br/></td></tr>
+<tr><td class="memItemLeft"  >static IList&lt; dynamic &gt;&nbsp;</td><td class="memItemRight" ><b>Get</b> (string serviceUri, string queryOptions, IAuthenticationScheme authenticationScheme)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Performs a request to the OData Service Uri returning a dynamic list with the results.  <br/></td></tr>
+<tr><td class="memItemLeft"></td><td class="memItemRight"></td></tr>
+</table>
+<br/><br/>
+<strong>Note: </strong> The current version of the OData Helper does not support the following features:
+<ul>   
+    <li>Manipulating the '<a href="http://www.odata.org/developers/protocols/operations#ManipulatingLinks">links</a>' of an entry (including the media-links pointing to the Media Resources)</li>
+    <li><a href="http://www.odata.org/developers/protocols/uri-conventions#ExpandSystemQueryOption">$expand</a> operation</li>
+    <li>Use of continuation tokens</li>
+    <li>PUT operations for <a href="http://www.odata.org/developers/protocols/operations#Updatingindividualproperties">deleting individual properties</a>. The helper always perform MERGE operations for updates</li>    
+    <li><a href="http://www.odata.org/developers/protocols/batch">Batch operations</a></li>
+</ul>
+
+
